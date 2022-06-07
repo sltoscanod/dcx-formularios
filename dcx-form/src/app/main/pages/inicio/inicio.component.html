@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutAlign="center">
+
+  <!-- Cada stepper es el paso o fase que hay que hacer. -->
+  <mat-stepper fxFlex="70" #stepper>
+
+    <mat-step errorMessage="Complete este apartado primero.">
+
+      <ng-template matStepLabel>Inputs</ng-template>
+
+      <div fxLayout="column" fxLayoutAlign=" center">
+        <app-form-inputs></app-form-inputs>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div fxLayout="column" fxLayoutAlign="center">
+          <button mat-stroked-button color="accent" matStepperNext>Siguiente apartado</button>
+        </div>
+
+      </div>
+
+    </mat-step>
+
+    <mat-step errorMessage="Complete este apartado previamente.">
+      <ng-template matStepLabel>Check, Radio y Slider</ng-template>
+      <div fxLayout="column" fxLayoutAlign=" center">
+        <app-form-buttons></app-form-buttons>
+      </div>
+
+    </mat-step>
+
+    <mat-step errorMessage="Termine el formulario.">
+      <ng-template matStepLabel>Selects</ng-template>
+      <div fxLayout="column" fxLayoutAlign=" center">
+        <app-form-selects></app-form-selects>
+      </div>
+    </mat-step>
+
+  </mat-stepper>
+
+</div>
