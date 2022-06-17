@@ -15,7 +15,14 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu'
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatListModule} from '@angular/material/list';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -34,7 +41,16 @@ import { MatMenuModule } from '@angular/material/menu'
     MatInputModule,
     MatStepperModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

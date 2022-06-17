@@ -1,19 +1,143 @@
-<form>
+<form [formGroup]="tuForm">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center end">
 
-    <div fxLayout="row" fxFlex="100" fxLayoutGap="100px" fxLayoutAlign=" center">
-      <h1>Primer nombre:</h1>
-      <mat-form-field appearance="outline">
-        <mat-label>Primer nombre</mat-label>
-        <input matInput placeholder="Introduzca su nombre" required>
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="50px">
+        <h1>Primer nombre:</h1>
+        <mat-form-field appearance="outline">
+          <mat-label>Primer nombre</mat-label>
+          <input formControlName="first_name" matInput type="text" placeholder="Introduzca su nombre" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="50px">
+        <h1>Segundo nombre:</h1>
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo nombre</mat-label>
+          <input formControlName="second_name" matInput placeholder="Introduzca su nombre">
+        </mat-form-field>
+      </div>
+
+      <hr width="100%">
+
+      <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="50px">
+        <h1>Primer apellido:</h1>
+        <mat-form-field appearance="outline">
+          <mat-label>Primer apellido</mat-label>
+          <input formControlName="last_name1" matInput placeholder="Introduzca su apellido" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="50px">
+        <h1>Segundo apellido:</h1>
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo apellido</mat-label>
+          <input formControlName="last_name2" matInput placeholder="Introduzca su apellido">
+        </mat-form-field>
+      </div>
     </div>
 
-    <div fxLayout="row" fxFlex="100" fxLayoutGap="100px" fxLayoutAlign=" center">
-      <h1>Segundo nombre:</h1>
-      <mat-form-field appearance="outline">
-        <mat-label>Segundo nombre</mat-label>
-        <input matInput placeholder="Introduzca su nombre">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center end">
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono personal</mat-label>
+        <span matPrefix>+34 &nbsp;</span>
+        <input formControlName="phone" type="tel" matInput>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono fijo</mat-label>
+        <span matPrefix>+34 &nbsp;</span>
+        <input formControlName="mobile_phone" type="tel" matInput>
+        <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
     </div>
+  </div>
+
+  <br>
+
+  <div fxLayot="row" fxLayoutAlign="center">
+    <h2>Número de miembros en la vivienda: *</h2>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center">
+    <mat-radio-group formControlName="number_of_relatives" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="0.5rem">
+
+      <mat-radio-button *ngFor="let number of numbers" [value]="number">
+        {{number}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <section fxLayout="column" fxLayoutAlign="center" fxFlex="40" [formGroup]="issues">
+      <h2>Indique si tiene alguna alergia:</h2>
+      <mat-checkbox color="warn" formControlName="Intolerant_milk">Intolerante a la leche.</mat-checkbox>
+      <mat-checkbox color="warn" formControlName="Allergic_fruits">Alergico a x frutos secos.</mat-checkbox>
+      <mat-checkbox color="warn" formControlName="Allergic_medicament">Alergico a x medicamento.</mat-checkbox>
+    </section>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h2>Está vacunado del COVID-19?</h2>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-slide-toggle color="primary" (change)="toggleChanges($event)">{{y_or_n[isSlideChecked]}}</mat-slide-toggle>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtro...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSrc">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+
 
 </form>
+<br>
+<br>
+<br>

@@ -1,40 +1,84 @@
-<div fxLayout="row" fxLayoutAlign="center">
+<div fxLayout="row wrap">
+  <div fxLayout="column" fxFlex="100">
+    <br>
+    <mat-tab-group mat-align-tabs="center" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="Forms">
+        <br>
+        <div *ngIf="selectedIndex==0" fxLayout="row" fxLayoutAlign="center">
 
-  <!-- Cada stepper es el paso o fase que hay que hacer. -->
-  <mat-stepper fxFlex="70" #stepper>
+          <!-- Cada stepper es el paso o fase que hay que hacer. -->
+          <mat-stepper linear fxFlex="70" #stepper>
+            <mat-step [stepControl]="disable_step" errorMessage="Complete este apartado primero.">
+              <ng-template matStepLabel>Datos personales</ng-template>
 
-    <mat-step errorMessage="Complete este apartado primero.">
+              <div fxLayout="column">
+                <br>
+                <app-form-inputs  (tuFormOut)="disStep($event)" fxFlex="100"></app-form-inputs>
+              </div>
 
-      <ng-template matStepLabel>Inputs</ng-template>
+              <div fxLayout="row" fxLayoutAlign="center">
+                <div fxLayout="column" fxLayoutAlign="center">
+                  <button mat-stroked-button color="warn" matStepperNext>Siguiente apartado</button>
+                </div>
+              </div>
+            </mat-step>
 
-      <div fxLayout="column" fxLayoutAlign=" center">
-        <app-form-inputs></app-form-inputs>
-      </div>
+            <mat-step [stepControl]="disable_step2" errorMessage="Complete este apartado previamente.">
+              <ng-template matStepLabel>Textos</ng-template>
 
-      <div fxLayout="row" fxLayoutAlign="center">
-        <div fxLayout="column" fxLayoutAlign="center">
-          <button mat-stroked-button color="accent" matStepperNext>Siguiente apartado</button>
+              <div fxLayout="column">
+                <app-form-text (dis2)="disStep2($event)" fxFlex="100"></app-form-text>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+                <div fxLayout="column" fxLayoutAlign="center">
+                  <button mat-stroked-button color="warn" matStepperPrevious>Apartado anterior</button>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center">
+                  <button mat-stroked-button color="warn" matStepperNext>Siguiente apartado</button>
+                </div>
+              </div>
+            </mat-step>
+
+            <mat-step errorMessage="Termine el formulario.">
+              <ng-template matStepLabel>Selects</ng-template>
+              <div fxLayout="column">
+                <app-form-selects fxFlex="100"></app-form-selects>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+                <div fxLayout="column" fxLayoutAlign="center">
+                  <button mat-stroked-button color="warn" matStepperPrevious>Apartado anterior</button>
+                </div>
+              </div>
+            </mat-step>
+          </mat-stepper>
         </div>
+      </mat-tab>
 
+      <mat-tab label="FormBuilder">
+        <br>
+        <div *ngIf="selectedIndex==1" fxLayout="row">
+          <div fxLayout="column" fxFlex="100">
+
+            <app-form-builder></app-form-builder>
+
+          </div>
+        </div>
+        <br>
+        <br>
+      </mat-tab>
+    </mat-tab-group>
+    <br>
+    <!-- Texto sin mas -->
+    <div class="mar-pag" fxLayout="row" fxFlex="100" fxLayoutAlign="end center">
+      <div fxLayout="column" fxFlex="100" class="fs-40" fxLayoutAlign="end center">
+        Página de ejemplo con formularios.
       </div>
-
-    </mat-step>
-
-    <mat-step errorMessage="Complete este apartado previamente.">
-      <ng-template matStepLabel>Check, Radio y Slider</ng-template>
-      <div fxLayout="column" fxLayoutAlign=" center">
-        <app-form-buttons></app-form-buttons>
-      </div>
-
-    </mat-step>
-
-    <mat-step errorMessage="Termine el formulario.">
-      <ng-template matStepLabel>Selects</ng-template>
-      <div fxLayout="column" fxLayoutAlign=" center">
-        <app-form-selects></app-form-selects>
-      </div>
-    </mat-step>
-
-  </mat-stepper>
-
+    </div>
+    <br>
+  </div>
 </div>
+
+{{disable_step}}

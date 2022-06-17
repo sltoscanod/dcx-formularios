@@ -1,0 +1,57 @@
+<form [formGroup]="tuForm">
+    <br>
+    <div fxLayout="row" fxLayoutAlign="center">
+        <h1>Información personal</h1>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+
+        <div fxLayout="column" fxFlex.xl="50" fxFlex.lg="40" fxFlex.md="40">
+            <mat-form-field>
+                <mat-label>Primer Nombre</mat-label>
+                <input type="text" matInput placeholder="Nombre" formControlName="name">
+                <mat-error *ngIf="!tuForm.valid">ERROR</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Segundo nombre</mat-label>
+                <input type="text" matInput formControlName="second_name" placeholder="Segundo nombre">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Apellido/s</mat-label>
+                <input type="text" matInput placeholder="Apellido/s" formControlName="last_name">
+                <mat-error *ngIf="!tuForm.valid">ERROR</mat-error>
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field>
+                    <mat-label>Correo Eléctronico/s</mat-label>
+                    <input type="text" matInput placeholder="Correo electronico" formControlName="mail">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Fecha de nacimieno/s</mat-label>
+                    <input type="date" matInput placeholder="Fecha de nacimiento" formControlName="birth_date">
+                </mat-form-field>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-form-field>
+                    <mat-label>Fecha de la cita:</mat-label>
+                    <input formControlName="date" matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+
+    </div>
+    <div fxLayout="column" fxLayoutAlign=" center">
+        <div fxLayout="row">
+            <button mat-raised-button color="primary" [disabled]="!tuForm.valid" (click)="openDialog()">SUBMIT</button>
+        </div>
+    </div>
+</form>

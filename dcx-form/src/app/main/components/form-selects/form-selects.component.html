@@ -1,1 +1,56 @@
-<p>form-selects works!</p>
+<form [formGroup]="tuForm">
+    <div fxLayout="row" fxLayoutAlign="center">
+        <div fxLayout="column" fxFlex="100">
+            <div fxLayout="row" fxLayoutAlign="center">
+                <div fxLayout="column" fxFlex="100">
+                    <br><br>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Idiomas que habla/conoce </mat-label>
+                        <mat-select multiple formControlName="data" >
+                            <mat-select-trigger>
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let item of LanguagesAdded" (removed)="Remove(item)">
+                                        {{item}}
+                                        <button matChipRemove>
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip>
+                                    <input placeholder="Idioma..." #langInput [matChipInputFor]="chipList">
+                                </mat-chip-list>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let item of allLanguages" (click)="add(item)" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+                <div fxLayout="column" fxFlex="40">
+                    <mat-form-field appearance="fill">
+                        <mat-label>País de nacimiento</mat-label>
+                        <mat-select [(value)]="selectedCountryBirth">
+                            <mat-option [value]="country_birth.value" *ngFor="let country_birth of countries_birth">{{ country_birth.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="40">
+                    <mat-form-field appearance="fill">
+                        <mat-label>País de residencia actualmente</mat-label>
+                        <mat-select [(value)]="selectedCountryResidence">
+                            <mat-option [value]="country_residence.value" *ngFor="let country_residence of countries_residence">{{ country_residence.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div fxLayout="row" fxLayoutAlign="center">
+        <button mat-raised-button (click)="openDialog()" color="primary">Terminar formulario</button>
+    </div>
+    <br>
+    <br>
+</form>
